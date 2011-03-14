@@ -31,13 +31,13 @@ class block_classday extends block_base {
 
 // Can also extend 'block_list'. See 'moodleblock.class.php'.
 
-    private $sampleconfig_filepath;
+    private $config_filepath;
 
     // The 'init' function is required for all blocks.
 
 
     function init() {
-        $this->sampleconfig_filepath = dirname(__FILE__) . '/sampleconfig.txt';
+        $this->config_filepath = dirname(__FILE__) . '/config.txt';
     
     
         // You need to define a human-friendly title for your block, for example "Test Block".
@@ -109,7 +109,7 @@ class block_classday extends block_base {
     // Returns an array of dates extracted from the config file
     function get_date_array($search="")
     {
-        $config_info = file_get_contents ($this->sampleconfig_filepath);
+        $config_info = file_get_contents ($this->config_filepath);
         $results = explode("\n", (string)$config_info);
         
         foreach($results as $value)
@@ -156,7 +156,7 @@ class block_classday extends block_base {
     // Returns integer.  That is the number of days in the school day cycle.
     function get_number_of_cycle_days()
     {
-        $config_info = file_get_contents ($this->sampleconfig_filepath);
+        $config_info = file_get_contents ($this->config_filepath);
         $results = explode("\n", (string)$config_info);
         
         foreach($results as $value)
