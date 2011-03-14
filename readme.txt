@@ -14,3 +14,8 @@ Configure:
 
 classday.css can be used to configure the display properties of the text that shows
 within the block.  Any valid css styles can be applied.
+
+TODO:
+*Configure within moodle.
+*Moodle 2.* support.
+
