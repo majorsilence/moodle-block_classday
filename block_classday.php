@@ -59,15 +59,17 @@ class block_classday extends block_base {
     // Let's take a walkthrough! :)
 
     function get_content() {
+    	global $CFG;
         if ($this->content !== NULL) {
             return $this->content;
         }
-    
+        
+    echo '<link rel="stylesheet" type="text/css" href="'.$CFG->wwwroot.'/blocks/classday/classday.css" />';
+        
         $hello = new SchoolClassDay($this->get_start_date(), $this->get_end_date(), $this->get_pd_array(), $this->get_holiday_array(), $this->get_number_of_cycle_days());
         
         
         $output = (string)$hello->GetCurrentDay();
-        
         
         $this->content = new stdClass;
         $this->content->text = $output; // //'The content of our NEWBLOCK block!';

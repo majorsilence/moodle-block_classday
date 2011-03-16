@@ -1,3 +1,21 @@
-text-align: center; 
-color: #800517;
-font-size:x-large;
+.classday, .classday_date {
+	font-size:0.85em;
+}
+.classday {
+    float:right;
+}
+.classday_weekend {
+    color:red;
+}
+.classday_holiday {
+    color:blue;
+}
+.classday_professionalday {
+    color:green;
+}
+.classday_border {
+    border-bottom: #999 1px solid;
+}
+.classday_today {
+    font-size: 1.6em;
+}
