@@ -101,7 +101,8 @@ class SchoolClassDay
         
     // This function loops through the calendar year looking for the current day to display.
     function GetCurrentDay() {
-        $day_count =1;
+        global $CFG;
+    	$day_count =1;
         $working_date = $this->start_date;
         $current_date = date('Y-m-d'); // Get todays date.
         
@@ -122,6 +123,27 @@ class SchoolClassDay
                 // increment the current date by 1 day.
             	for ($i=1; $i<8; $i++) {
             		$day_used = false;
+            		// after display of current day, offer a choice of displaying or hiding week
+            		if ($i==2) {
+                        $showweek = get_string('showweek','block_classday');
+                        $hideweek = get_string('hideweek','block_classday');
+            			$display_message .= '<script language="javascript"> 
+							function toggle(showweek, hideweek) {
+							    var ele = document.getElementById("toggleText");
+							    var text = document.getElementById("displayText");
+							    if(ele.style.display == "block") {
+                                    ele.style.display = "none";
+							        text.innerHTML = showweek;
+							    }
+							    else {
+							        ele.style.display = "block";
+							        text.innerHTML = hideweek;
+							    }
+							} 
+							</script>';
+            			$display_message .= '<a id="displayText" href="javascript:toggle(\''.$showweek.'\', \''.$hideweek.'\');">'.$showweek.'</a>
+                            <div id="toggleText" style="display: none">';
+            		}
 		            if (in_array($working_date, $this->pd_days)) {
 		                // Check if it is a PD Day. 
 		                $display_message .= $this->getDisplayDate ($working_date) . '<span class="classday classday_professionalday">'.
@@ -163,7 +185,7 @@ class SchoolClassDay
 		            }
 		        }
             	
-            	return $display_message;
+            	return $display_message.'</div>';
                 break;  
             }
             
