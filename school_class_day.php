@@ -102,7 +102,7 @@ class SchoolClassDay
     // This function loops through the calendar year looking for the current day to display.
     function GetCurrentDay() {
         global $CFG;
-    	$day_count =0;
+        $day_count =0;
         $working_date = $this->start_date;
         $current_date = date('Y-m-d'); // Get todays date.
         
@@ -121,71 +121,71 @@ class SchoolClassDay
                 // Found the current day; print it and Break out of loop.
                 // continue the loop for 6 more days, to display a whole week of class_days (JR)
                 // increment the current date by 1 day.
-            	for ($i=1; $i<8; $i++) {
-            		$day_used = false;
-            		// after display of current day, offer a choice of displaying or hiding week
-            		if ($i==2) {
+                for ($i=1; $i<8; $i++) {
+                    $day_used = false;
+                    // after display of current day, offer a choice of displaying or hiding week
+                    if ($i==2) {
                         $showweek = get_string('showweek','block_classday');
                         $hideweek = get_string('hideweek','block_classday');
-            			$display_message .= '<script language="javascript"> 
-							function toggle(showweek, hideweek) {
-							    var ele = document.getElementById("toggleText");
-							    var text = document.getElementById("displayText");
-							    if(ele.style.display == "block") {
+                        $display_message .= '<script language="javascript"> 
+                            function toggle(showweek, hideweek) {
+                                var ele = document.getElementById("toggleText");
+                                var text = document.getElementById("displayText");
+                                if(ele.style.display == "block") {
                                     ele.style.display = "none";
-							        text.innerHTML = showweek;
-							    }
-							    else {
-							        ele.style.display = "block";
-							        text.innerHTML = hideweek;
-							    }
-							} 
-							</script>';
-            			$display_message .= '<a id="displayText" href="javascript:toggle(\''.$showweek.'\', \''.$hideweek.'\');">'.$showweek.'</a>
+                                    text.innerHTML = showweek;
+                                }
+                                else {
+                                    ele.style.display = "block";
+                                    text.innerHTML = hideweek;
+                                }
+                            } 
+                            </script>';
+                        $display_message .= '<a id="displayText" href="javascript:toggle(\''.$showweek.'\', \''.$hideweek.'\');">'.$showweek.'</a>
                             <div id="toggleText" style="display: none">';
-            		}
-		            if (in_array($working_date, $this->pd_days)) {
-		                // Check if it is a PD Day. 
-		                $display_message .= $this->getDisplayDate ($working_date) . '<span class="classday classday_professionalday">'.
-		                get_string('professionalday','block_classday').'</span><br />';
-		            }
-		            elseif(in_array($working_date, $this->holiday_days)) {
-		                // Check if it is a holdiay.
-		                $display_message .= $this->getDisplayDate ($working_date) . '<span class="classday classday_holiday">'.
-		                  get_string('holiday','block_classday').'</span><br />';
-		            }
-		            elseif (date('N', strtotime($working_date)) == 6 || date('N', strtotime($working_date)) ==7) {
-		                // Check if weekend.  6 is saturday.  7 is sunday.
-		                $display_message .= $this->getDisplayDate ($working_date) . '<span class="classday classday_weekend">'.
-		                  get_string('weekend','block_classday').'</span><br />';
-		                
-		            } else {
-		                $display_message .= $this->getDisplayDate ($working_date) . '<span class="classday classday_day">'.
-		                  get_string('day','form').' '.$day_count. '</span><br />';
-		                $day_used=true;
-		            }
-		            if ($i == 1) {
-		            	$display_message = '<span class="classday_today">'.$display_message.'</span>';
-		            }
-		            // increment the current date by 1 day.
-		            $working_date = date("Y-m-d", strtotime ("+1 day", strtotime($working_date)));
-		            if ($working_date > $this->end_date) {
-		            	break;
-		            }
+                    }
+                    if (in_array($working_date, $this->pd_days)) {
+                        // Check if it is a PD Day. 
+                        $display_message .= $this->getDisplayDate ($working_date) . '<span class="classday classday_professionalday">'.
+                        get_string('professionalday','block_classday').'</span><br />';
+                    }
+                    elseif(in_array($working_date, $this->holiday_days)) {
+                        // Check if it is a holdiay.
+                        $display_message .= $this->getDisplayDate ($working_date) . '<span class="classday classday_holiday">'.
+                          get_string('holiday','block_classday').'</span><br />';
+                    }
+                    elseif (date('N', strtotime($working_date)) == 6 || date('N', strtotime($working_date)) ==7) {
+                        // Check if weekend.  6 is saturday.  7 is sunday.
+                        $display_message .= $this->getDisplayDate ($working_date) . '<span class="classday classday_weekend">'.
+                          get_string('weekend','block_classday').'</span><br />';
+                        
+                    } else {
+                        $display_message .= $this->getDisplayDate ($working_date) . '<span class="classday classday_day">'.
+                          get_string('day','form').' '.$day_count. '</span><br />';
+                        $day_used=true;
+                    }
+                    if ($i == 1) {
+                        $display_message = '<span class="classday_today">'.$display_message.'</span>';
+                    }
+                    // increment the current date by 1 day.
+                    $working_date = date("Y-m-d", strtotime ("+1 day", strtotime($working_date)));
+                    if ($working_date > $this->end_date) {
+                        break;
+                    }
                     if ($i<7) {
                       $display_message .= '<div class="classday_border"></div>';
                     }
-		            if($day_used == true) {
-		                // Days are only used if it is not a weekend/pd/holiday.
-		                $day_count++;
-		            }
-		            if ($day_count > $this->number_of_days) {
-		                // Reset day back 1 once all 7 days have been used
-		                $day_count = 1;
-		            }
-		        }
-            	
-            	return $display_message.'</div>';
+                    if($day_used == true) {
+                        // Days are only used if it is not a weekend/pd/holiday.
+                        $day_count++;
+                    }
+                    if ($day_count > $this->number_of_days) {
+                        // Reset day back 1 once all 7 days have been used
+                        $day_count = 1;
+                    }
+                }
+                
+                return $display_message.'</div>';
                 break;  
             }
             
@@ -204,15 +204,15 @@ class SchoolClassDay
         }
     }
     function getDisplayDate ($working_date) {
-    	$current_date = date('Y-m-d'); // Get todays date.
-    	$displaydate = '<span class="classday_date">';
-    	if ($working_date == $current_date) {
-    		$displaydate .= get_string('today','calendar').'</span>';
-    	} else {
-	    	$time = explode("-", $working_date);
-	        $timestamp = make_timestamp($time[0],$time[1],$time[2]);
-	        $displaydate .= userdate($timestamp, get_string('strftimedayshort')).'</span>';
-    	}
+        $current_date = date('Y-m-d'); // Get todays date.
+        $displaydate = '<span class="classday_date">';
+        if ($working_date == $current_date) {
+            $displaydate .= get_string('today','calendar').'</span>';
+        } else {
+            $time = explode("-", $working_date);
+            $timestamp = make_timestamp($time[0],$time[1],$time[2]);
+            $displaydate .= userdate($timestamp, get_string('strftimedayshort')).'</span>';
+        }
         return $displaydate.'<br />';
     }
 }

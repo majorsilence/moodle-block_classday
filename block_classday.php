@@ -59,7 +59,7 @@ class block_classday extends block_base {
     // Let's take a walkthrough! :)
 
     function get_content() {
-    	global $CFG;
+        global $CFG;
         if ($this->content !== NULL) {
             return $this->content;
         }
