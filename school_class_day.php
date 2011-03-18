@@ -102,7 +102,7 @@ class SchoolClassDay
     // This function loops through the calendar year looking for the current day to display.
     function GetCurrentDay() {
         global $CFG;
-    	$day_count =1;
+    	$day_count =0;
         $working_date = $this->start_date;
         $current_date = date('Y-m-d'); // Get todays date.
         
@@ -113,7 +113,7 @@ class SchoolClassDay
                 && !in_array($working_date, $this->holiday_days) // Check if it is NOT a holiday Day.
                 && (date('N', strtotime($working_date)) < 6) // Check if it is NOT a weekend Day.
                 ) {
-                	$day_count++;
+                $day_count++;
             }
             $display_message = '';
             $day_used = false;
