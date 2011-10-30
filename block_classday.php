@@ -47,10 +47,6 @@ class block_classday extends block_base {
         // In this case, we assume that you have $string['blockname'] = "Test Block"; in your lang file.
         $this->title = get_string('blockname','block_classday');
 
-        // You can use this so that your block can upgrade itself in the future, if there is need.
-        // If you are just creating a new block, you do not need to change this value (but it is
-        // considered polite to set it to YYYYMMDD00).
-        $this->version = 2011030900;
     }
 
     // Apart from the constructor, there is only ONE function you HAVE to define, get_content().
